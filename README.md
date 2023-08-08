@@ -1,0 +1,1 @@
+Ideas: List of books , Books sorted by genre , Other sorting mechanism , World domination 
