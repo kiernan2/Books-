@@ -30,7 +30,7 @@ namespace FreeKingdomLit
 
       app.UseEndpoints(routes => 
       {
-        routes.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}")
+        routes.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
       });
 
       app.Run(async (context) =>
