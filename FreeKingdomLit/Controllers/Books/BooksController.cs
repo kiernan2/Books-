@@ -12,5 +12,18 @@ namespace FreeKingdomLit.Controllers
       List<Book> newlist = Book._instances;
       return View(newlist);
     }
+
+    [HttpGet("/Books/new")]
+    public ActionResult Create()
+    {
+      return View();
+    }
+
+    [HttpPost("/Books/Create")]
+    public ActionResult Create(string title, int pageNumber)
+    {
+      Book book = new Book(title, pageNumber);
+      return RedirectToAction("Index");
+    }
   }
 }
