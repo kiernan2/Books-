@@ -1,14 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
 using FreeKingdomLit.Models;
+using System.Collections.Generic;
 
 namespace FreeKingdomLit.Controllers
 {
   public class BooksController : Controller
   {
+    [HttpGet("/Books/")]
     public ActionResult Index()
     {
-      Book newbook = new Book("soo", 345);
-      return View(newbook);
+      List<Book> newlist = Book._instances;
+      return View(newlist);
     }
   }
 }

@@ -1,8 +1,21 @@
 @using FreeKingdomLit.Models
 
-@model Book
+@model List<FreeKingdomLit.Models.Book>
 <h1>More beer</h1>
 
-<p>
-  @Model.Title: @Model.Pages
-</p>
+
+@if(Model.Any())
+{
+<ui>
+
+  @foreach(Book book in Model)
+  {
+    <li>@book.Title</li>
+  }
+</ui>
+}
+else
+{
+  <p>no books</p>
+}
+<a href="/">Back</a>
