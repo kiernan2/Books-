@@ -7,10 +7,9 @@
 @if(Model.Any())
 {
 <ui>
-
   @foreach(Book book in Model)
   {
-    <li>@book.Title</li>
+    <li><a href="/Books/@book.BookId">@book.Title</a></li>
   }
 </ui>
 }

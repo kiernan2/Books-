@@ -25,5 +25,12 @@ namespace FreeKingdomLit.Controllers
       Book book = new Book(title, pageNumber);
       return RedirectToAction("Index");
     }
+
+    [HttpGet("/Books/{id}")]
+    public ActionResult Details(int id)
+    {
+      Book book = Book.GetBook(id);
+      return View(book);
+    }
   }
 }

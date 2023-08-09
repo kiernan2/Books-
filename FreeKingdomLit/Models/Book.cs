@@ -16,5 +16,10 @@ namespace FreeKingdomLit.Models
       Title = title;
       Pages = pages;
     }
+
+    public static Book GetBook(int id)
+    {
+      return _instances[id - 1];
+    }
   }
 }
