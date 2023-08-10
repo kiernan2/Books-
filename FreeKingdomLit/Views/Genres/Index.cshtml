@@ -1,0 +1,19 @@
+@using FreeKingdomLit.Models
+
+@model List<FreeKingdomLit.Models.Genre>
+
+<h1>Genres</h1>
+
+@if(Model.Any())
+{
+<ui>
+  @foreach(Genre genre in Model)
+  {
+    <li><a href="">@genre.Name</a></li>
+  }
+</ui>
+}
+else
+{
+  <p>no Genres set</p>
+}
