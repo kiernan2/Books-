@@ -48,5 +48,20 @@ namespace FreeKingdomLit.Controllers
       book.Pages = pageNumber;
       return RedirectToAction("Details", new {id});
     }
+
+    [HttpGet("/Books/{id}/Delete")]
+    public ActionResult Delete(int id)
+    {
+      Book book = Book.GetBook(id);
+      return View(book);
+    }
+
+    [HttpPost("/Books/Delete"), ActionName("Delete")]
+    public ActionResult DeleteConfirmed (int id)
+    {
+      Book book = Book.GetBook(id);
+      Book._instances.Remove(book);
+      return RedirectToAction("Index");
+    }
   }
 }
