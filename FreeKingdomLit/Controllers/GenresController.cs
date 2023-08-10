@@ -12,5 +12,18 @@ namespace FreeKingdomLit.Controllers
       List<Genre> genres = Genre._instances;
       return View(genres);
     }
+
+    [HttpGet("/Genres/new")]
+    public ActionResult Create()
+    {
+      return View();
+    }
+
+    [HttpPost("/Genres/Create")]
+    public ActionResult Create(string name)
+    {
+      Genre genre = new Genre(name);
+      return RedirectToAction("Index");
+    }
   }
 }
