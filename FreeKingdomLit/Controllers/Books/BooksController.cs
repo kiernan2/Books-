@@ -32,5 +32,21 @@ namespace FreeKingdomLit.Controllers
       Book book = Book.GetBook(id);
       return View(book);
     }
+
+    [HttpGet("/Books/{id}/Edit")]
+    public ActionResult Edit(int id)
+    {
+      Book book = Book.GetBook(id);
+      return View(book);
+    }
+
+    [HttpPost("/Books/{id}/Edit")]
+    public ActionResult Edit(string title, int pageNumber , int id)
+    {
+      Book book = Book.GetBook(id);
+      book.Title = title;
+      book.Pages = pageNumber;
+      return RedirectToAction("Details", new {id});
+    }
   }
 }

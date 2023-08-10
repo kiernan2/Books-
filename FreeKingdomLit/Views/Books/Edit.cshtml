@@ -1,0 +1,13 @@
+@using FreeKingdomLit.Models
+@model FreeKingdomLit.Models.Book
+
+<h1>Edit or don't I don't actually care</h1>
+
+<form action="/Books/@Model.BookId/Edit" method="post">
+  <input id="id" name="id" type="number" value="@Model.BookId" hidden> 
+  <label for="title">Title</label>
+  <input id="title" name="title" type="text" value="@Model.Title">
+  <label for="pageNumber">Number of Pages</label>
+  <input id="pageNumber" name="pageNumber" type="number" value="@Model.Pages">
+  <button type="submit">Submit</button>
+</form>
