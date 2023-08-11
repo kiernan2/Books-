@@ -1,7 +1,7 @@
 @using FreeKingdomLit.Models
 @model FreeKingdomLit.Models.Book
 
-<h1>Edit or don't I don't actually care</h1>
+<h1>Edit Book</h1>
 
 <form action="/Books/@Model.BookId/Edit" method="post">
   <input id="id" name="id" type="number" value="@Model.BookId" hidden> 
@@ -11,3 +11,5 @@
   <input id="pageNumber" name="pageNumber" type="number" value="@Model.Pages">
   <button type="submit">Submit</button>
 </form>
+
+<a href="/Books/@Model.BookId">Back</a>
