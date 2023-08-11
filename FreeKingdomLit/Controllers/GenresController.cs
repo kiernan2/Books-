@@ -32,5 +32,20 @@ namespace FreeKingdomLit.Controllers
       Genre genre = Genre.GetGenre(id);
       return View(genre);
     }
+
+    [HttpGet("/Genres/{id}/Edit")]
+    public ActionResult Edit(int id)
+    {
+      Genre genre = Genre.GetGenre(id);
+      return View(genre);
+    }
+
+    [HttpPost("/Genres/{id}/Edit")]
+    public ActionResult Edit(string name, int id)
+    {
+      Genre genre = Genre.GetGenre(id);
+      genre.Name = name;
+      return RedirectToAction("Details", new {id});
+    }
   }
 }
