@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using FreeKingdomLit.Models;
+using System.Collections.Generic;
 
 namespace FreeKingdomLit.Controllers
 {
@@ -7,7 +9,10 @@ namespace FreeKingdomLit.Controllers
     [Route("/")]
     public ActionResult Index()
     {
-      return View();
+      List<Genre> genreList = Genre._instances;
+      ViewBag.GenreList = genreList;
+      List<Book> bookList = Book._instances;
+      return View(bookList);
     }
   }
 }
