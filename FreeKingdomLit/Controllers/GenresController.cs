@@ -47,5 +47,20 @@ namespace FreeKingdomLit.Controllers
       genre.Name = name;
       return RedirectToAction("Details", new {id});
     }
+
+    [HttpGet("/Genres/{id}/Delete")]
+    public ActionResult Delete(int id)
+    {
+      Genre genre = Genre.GetGenre(id);
+      return View(genre);
+    }
+
+    [HttpPost("/Genres/Delete"), ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int id)
+    {
+      Genre genre = Genre.GetGenre(id);
+      Genre._instances.Remove(genre);
+      return RedirectToAction("Index");
+    }
   }
 }

@@ -1,0 +1,12 @@
+@using FreeKingdomLit.Models
+@model FreeKingdomLit.Models.Genre
+
+<h1>Delete Genre</h1>
+
+<p>Delete: @Model.Name</p>
+<form action="/Genres/Delete" method="post">
+  <input id="id" name="id" type="number" value="@Model.GenreId" hidden>
+  <button type="submit">Confirm</button>
+</form>
+
+<a href="/Genres/@Model.GenreId">Back</a>
