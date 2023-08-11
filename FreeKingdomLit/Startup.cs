@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using FreeKingdomLit.Models;
 
 namespace FreeKingdomLit
 {
@@ -14,13 +16,18 @@ namespace FreeKingdomLit
     {
       IConfigurationBuilder builder = new ConfigurationBuilder()
         .SetBasePath(env.ContentRootPath)
-        .AddEnvironmentVariables();
+        .AddJsonFile("appsettings.json");    
       Configuration = builder.Build();
     }
 
     public void ConfigureServices(IServiceCollection services)
     {
+
       services.AddMvc();
+      services.AddEntityFrameworkMySql()
+        .AddDbContext<FreeKingdomLitContext>(
+          options => options.UseMySql(Configuration["ConnectionStrings:DefaultConnection"],
+          ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
     }
     
     public void Configure(IApplicationBuilder app)
