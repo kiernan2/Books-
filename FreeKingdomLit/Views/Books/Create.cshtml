@@ -1,11 +1,14 @@
-<h1>Add a book containing the secrets of multi-verse</h1>
+<h1>Add a book</h1>
 
-<form action="/Books/Create" method="post">
-  <label for="title">Title</label>
-  <input id="title" name="title" type="text">
-  <label for="pageNumber">Number of Pages</label>
-  <input id="pageNumber" name="pageNumber" type="number">
-  <button type="submit">Submit</button>
-</form>
+@model FreeKingdomLit.Models.Book
 
-<a href="/Books/">Back</a>
+<h4>Add a new book</h4>
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Title)
+  @Html.TextBoxFor(model => model.Title)
+  @Html.LabelFor(model => model.Pages)
+  @Html.TextBoxFor(model => model.Pages)
+  <input type="submit" value="Add new book">
+}
+<p>@Html.ActionLink("Show all books", "Index")</p>
