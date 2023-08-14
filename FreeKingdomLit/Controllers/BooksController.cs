@@ -34,12 +34,11 @@ namespace FreeKingdomLit.Controllers
       return RedirectToAction("Index");
     }
 
-    // [HttpGet("/Books/{id}")]
-    // public ActionResult Details(int id)
-    // {
-    //   Book book = Book.GetBook(id);
-    //   return View(book);
-    // }
+    public ActionResult Details(int id)
+    {
+      Book thisBook = _db.Books.FirstOrDefault(book => book.BookId == id);
+      return View(thisBook);
+    }
 
     // [HttpGet("/Books/{id}/Edit")]
     // public ActionResult Edit(int id)

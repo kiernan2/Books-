@@ -8,7 +8,7 @@
 <ui>
   @foreach(Book book in Model)
   {
-    <li><a href="/Books/@book.BookId">@book.Title</a></li>
+    <li>@Html.ActionLink($"{book.Title}", "Details", new {id = book.BookId})</li>
   }
 </ui>
 }

@@ -1,9 +1,11 @@
 @using FreeKingdomLit.Models
+@model FreeKingdomLit.Models.Book
 
 <h1>Book Details Page</h1>
 
-<p>@Model.Title: @Model.Pages</p>
+<p>Title: @Model.Title</p>
+<p>Pages: @Model.Pages</p>
 
 <a href="/Books/@Model.BookId/Delete">Delete</a>
 <a href="/Books/@Model.BookId/Edit">Edit</a>
-<a href="/Books/">Back</a>
+<p>@Html.ActionLink("Back", "Index")</p>
