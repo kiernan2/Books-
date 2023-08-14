@@ -10,7 +10,7 @@ namespace FreeKingdomLit
 {
   public class Startup
   {
-    public IConfigurationRoot Configuration { get; }
+    public IConfigurationRoot Configuration { get; set; }
 
     public Startup(IWebHostEnvironment env)
     {
