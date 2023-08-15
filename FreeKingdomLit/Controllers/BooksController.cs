@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using FreeKingdomLit.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,21 +41,19 @@ namespace FreeKingdomLit.Controllers
       return View(thisBook);
     }
 
-    // [HttpGet("/Books/{id}/Edit")]
-    // public ActionResult Edit(int id)
-    // {
-    //   Book book = Book.GetBook(id);
-    //   return View(book);
-    // }
+    public ActionResult Edit(int id)
+    {
+      Book thisBook = _db.Books.FirstOrDefault(book => book.BookId == id);
+      return View(thisBook);
+    }
 
-    // [HttpPost("/Books/{id}/Edit")]
-    // public ActionResult Edit(string title, int pageNumber , int id)
-    // {
-    //   Book book = Book.GetBook(id);
-    //   book.Title = title;
-    //   book.Pages = pageNumber;
-    //   return RedirectToAction("Details", new {id});
-    // }
+    [HttpPost]
+    public ActionResult Edit(Book book)
+    {
+      _db.Entry(book).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Details", new {id = book.BookId});
+    }
 
     // [HttpGet("/Books/{id}/Delete")]
     // public ActionResult Delete(int id)

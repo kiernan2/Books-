@@ -3,13 +3,17 @@
 
 <h1>Edit Book</h1>
 
-<form action="/Books/@Model.BookId/Edit" method="post">
-  <input id="id" name="id" type="number" value="@Model.BookId" hidden> 
-  <label for="title">Title</label>
-  <input id="title" name="title" type="text" value="@Model.Title">
-  <label for="pageNumber">Number of Pages</label>
-  <input id="pageNumber" name="pageNumber" type="number" value="@Model.Pages">
-  <button type="submit">Submit</button>
-</form>
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.BookId)
 
-<a href="/Books/@Model.BookId">Back</a>
+  @Html.LabelFor(model => model.Title)
+  @Html.EditorFor(model => model.Title)
+
+  @Html.LabelFor(model => model.Pages)
+  @Html.EditorFor(model => model.Pages)
+
+  <input type="submit" value="Save" />
+}
+
+<p>@Html.ActionLink("Back to list", "Index")</p>
