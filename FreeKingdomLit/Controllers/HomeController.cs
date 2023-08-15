@@ -9,10 +9,10 @@ namespace FreeKingdomLit.Controllers
     [Route("/")]
     public ActionResult Index()
     {
-      List<Genre> genreList = Genre._instances;
-      ViewBag.GenreList = genreList;
-      List<Book> bookList = Book._instances;
-      return View(bookList);
+      // List<Genre> genreList = Genre._instances;
+      // ViewBag.GenreList = genreList;
+      // List<Book> bookList = Book._instances;
+      return View();
     }
   }
 }

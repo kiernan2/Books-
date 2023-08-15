@@ -4,34 +4,7 @@
 
 <h1>Books the librarians have censored because they don't want you know the truth</h1>
 
-<a href="./Books/">Books</a>
-<a href="./Genres/">Genres</a>
+<p>@Html.ActionLink("Books", "Index", "Books")</p>
+<p>@Html.ActionLink("Genres", "Index", "Genres")</p>
 
 <h2>Books</h2>
-@if(Model.Any())
-{
-  <ul>
-    @foreach(Book book in Model)
-    {
-      <li>@book.Title</li>
-    }
-  </ul>
-}
-else
-{
-  <p>No books added ... Yet!</p>
-}
-<h2>Genres</h2>
-@if(ViewBag.GenreList.Count > 0)
-{
-  <ul>
-    @foreach(Genre genre in ViewBag.GenreList)
-    {
-      <li>@genre.Name</li>
-    }
-  </ul>
-}
-else
-{
-  <p>No Genres added ... Yet!</p>
-}
