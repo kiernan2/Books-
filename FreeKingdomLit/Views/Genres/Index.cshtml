@@ -9,7 +9,7 @@
 <ui>
   @foreach(Genre genre in Model)
   {
-    <li><a href="/Genres/@genre.GenreId">@genre.Name</a></li>
+    <li>@Html.ActionLink($"{genre.Name}", "Details", new {id = genre.GenreId})</li>
   }
 </ui>
 }
@@ -18,6 +18,6 @@ else
   <p>no Genres set</p>
 }
 
-<a href="/Genres/new">Add Genre</a>
+<p>@Html.ActionLink("Add Genre", "Create")</p>
 <br>
-<a href="/">Back</a>
+<p>@Html.ActionLink("Back", "Index", "Home")</p>
