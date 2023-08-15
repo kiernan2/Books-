@@ -1,9 +1,14 @@
-<h1>Genre creation</h1>
+<h1>Add a Genre</h1>
 
-<form action="/Genres/Create" method="post">
-  <label for="name">Name</label>
-  <input id="name" name="name" type="text">
-  <button type="submit">Submit</button>
-</form>
+@model FreeKingdomLit.Models.Genre
 
-<a href="/Genres">GO BACK</a>
+<h4>Add a new Genre</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => model.Name)
+  <input type="submit" value="Add new Genre">
+}
+
+<p>@Html.ActionLink("Show all Genres", "Index")</p>
