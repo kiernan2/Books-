@@ -4,9 +4,10 @@
 <h1>Delete Book</h1>
 
 <p>Delete: @Model.Title</p>
-<form action="/Books/Delete" method="post">
-  <input id="id" name="id" type="number" value="@Model.BookId" hidden>
-  <button type="submit">Confirm</button>
-</form>
 
-<a href="/Books/@Model.BookId">Back</a>
+@using (Html.BeginForm())
+{
+  <input type="submit" value="Delete">
+}
+
+<p>@Html.ActionLink("Back", "Details", new {id = Model.BookId})</p>

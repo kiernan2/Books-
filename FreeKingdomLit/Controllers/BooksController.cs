@@ -55,19 +55,19 @@ namespace FreeKingdomLit.Controllers
       return RedirectToAction("Details", new {id = book.BookId});
     }
 
-    // [HttpGet("/Books/{id}/Delete")]
-    // public ActionResult Delete(int id)
-    // {
-    //   Book book = Book.GetBook(id);
-    //   return View(book);
-    // }
+    public ActionResult Delete(int id)
+    {
+      Book thisBook = _db.Books.FirstOrDefault(book => book.BookId == id);
+      return View(thisBook);
+    }
 
-    // [HttpPost("/Books/Delete"), ActionName("Delete")]
-    // public ActionResult DeleteConfirmed (int id)
-    // {
-    //   Book book = Book.GetBook(id);
-    //   Book._instances.Remove(book);
-    //   return RedirectToAction("Index");
-    // }
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed (int id)
+    {
+      Book thisBook = _db.Books.FirstOrDefault(book => book.BookId == id);
+      _db.Books.Remove(thisBook);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
