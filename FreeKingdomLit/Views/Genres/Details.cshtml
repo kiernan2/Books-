@@ -1,9 +1,10 @@
 @using FreeKingdomLit.Models
+@model FreeKingdomLit.Models.Genre
 
 <h1>Genre Details Page</h1>
 
 <p>@Model.Name</p>
 
-<a href="/Genres/@Model.GenreId/Delete">Delete</a>
-<a href="/Genres/@Model.GenreId/Edit">Edit</a>
-<a href="/Genres">Back</a>
+<p>@Html.ActionLink("Delete", "Delete", new {id = Model.GenreId})</p>
+<p>@Html.ActionLink("Edit", "Edit", new {id = Model.GenreId})</p>
+<p>@Html.ActionLink("Back", "Index")</p>

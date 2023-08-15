@@ -35,12 +35,11 @@ namespace FreeKingdomLit.Controllers
       return RedirectToAction("Index");
     }
 
-    // [HttpGet("/Genres/{id}")]
-    // public ActionResult Details(int id)
-    // {
-    //   Genre genre = Genre.GetGenre(id);
-    //   return View(genre);
-    // }
+    public ActionResult Details(int id)
+    {
+      Genre genre = _db.Genres.FirstOrDefault(genre => genre.GenreId == id);
+      return View(genre);
+    }
 
     // [HttpGet("/Genres/{id}/Edit")]
     // public ActionResult Edit(int id)
