@@ -3,11 +3,14 @@
 
 <h1>Edit Genre</h1>
 
-<form action="/Genres/@Model.GenreId/Edit" method="post">
-  <input id="id" name="id" type="number" value="@Model.GenreId" hidden>
-  <label for="name">Name</label>
-  <input id="name" name="name" type="text" value="@Model.Name">
-  <button type="submit">Submit</button>
-</form>
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.GenreId)
 
-<a href="/Genres/@Model.GenreId">Back</a>
+  @Html.LabelFor(model => model.Name)
+  @Html.EditorFor(model => model.Name)
+
+  <input type="submit" value="Save" />
+}
+
+<p>@Html.ActionLink("Back to list", "Index")</p>

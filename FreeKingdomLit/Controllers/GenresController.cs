@@ -41,20 +41,19 @@ namespace FreeKingdomLit.Controllers
       return View(genre);
     }
 
-    // [HttpGet("/Genres/{id}/Edit")]
-    // public ActionResult Edit(int id)
-    // {
-    //   Genre genre = Genre.GetGenre(id);
-    //   return View(genre);
-    // }
+    public ActionResult Edit(int id)
+    {
+      Genre thisGenre = _db.Genres.FirstOrDefault(genre => genre.GenreId == id);
+      return View(thisGenre);
+    }
 
-    // [HttpPost("/Genres/{id}/Edit")]
-    // public ActionResult Edit(string name, int id)
-    // {
-    //   Genre genre = Genre.GetGenre(id);
-    //   genre.Name = name;
-    //   return RedirectToAction("Details", new {id});
-    // }
+    [HttpPost]
+    public ActionResult Edit(Genre genre)
+    {
+      _db.Entry(genre).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = genre.GenreId });
+    }
 
     // [HttpGet("/Genres/{id}/Delete")]
     // public ActionResult Delete(int id)
