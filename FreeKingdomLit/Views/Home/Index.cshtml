@@ -8,3 +8,31 @@
 <p>@Html.ActionLink("Genres", "Index", "Genres")</p>
 
 <h2>Books</h2>
+@if(Model.Any())
+{
+  <ul>
+  @foreach(Book book in Model)
+  {
+    <li>@book.Title</li>
+  }
+  </ul>
+}
+else
+{
+  <p>No books added</p>
+}
+
+<h2>Genres</h2>
+@if(Model.Any())
+{
+  <ul>
+  @foreach(Genre genre in ViewBag.GenreList)
+  {
+    <li>@genre.Name</li>
+  }
+  </ul>
+}
+else
+{
+  <p>No genre added</p>
+}
