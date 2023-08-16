@@ -55,19 +55,19 @@ namespace FreeKingdomLit.Controllers
       return RedirectToAction("Details", new { id = genre.GenreId });
     }
 
-    // [HttpGet("/Genres/{id}/Delete")]
-    // public ActionResult Delete(int id)
-    // {
-    //   Genre genre = Genre.GetGenre(id);
-    //   return View(genre);
-    // }
+    public ActionResult Delete(int id)
+    {
+      Genre genre = _db.Genres.FirstOrDefault(genre => genre.GenreId == id);
+      return View(genre);
+    }
 
-    // [HttpPost("/Genres/Delete"), ActionName("Delete")]
-    // public ActionResult DeleteConfirmed(int id)
-    // {
-    //   Genre genre = Genre.GetGenre(id);
-    //   Genre._instances.Remove(genre);
-    //   return RedirectToAction("Index");
-    // }
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int id)
+    {
+      Genre thisGenre = _db.Genres.FirstOrDefault(genre => genre.GenreId == id);
+      _db.Genres.Remove(thisGenre);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
