@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using FreeKingdomLit.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FreeKingdomLit.Controllers
 {
@@ -24,14 +25,20 @@ namespace FreeKingdomLit.Controllers
 
     public ActionResult Create()
     {
+      ViewBag.GenreId = new SelectList(_db.Genres, "GenreId", "Name");
       return View();
     }
 
     [HttpPost]
-    public ActionResult Create(Book book)
+    public ActionResult Create(Book book, int genreId)
     {
       _db.Books.Add(book);
       _db.SaveChanges();
+      if (genreId != 0)
+      {
+        _db.BooksGenres.Add(new BookGenre() { GenreId = genreId , BookId = book.BookId });
+        _db.SaveChanges();
+      }
       return RedirectToAction("Index");
     }
 
