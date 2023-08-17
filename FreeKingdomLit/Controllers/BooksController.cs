@@ -18,8 +18,8 @@ namespace FreeKingdomLit.Controllers
 
     public ActionResult Index()
     {
-      List<Book> newlist = _db.Books.ToList();
-      return View(newlist);
+      List<Book> newList = _db.Books.ToList();
+      return View(newList);
     }
 
     public ActionResult Create()
@@ -37,7 +37,10 @@ namespace FreeKingdomLit.Controllers
 
     public ActionResult Details(int id)
     {
-      Book thisBook = _db.Books.FirstOrDefault(book => book.BookId == id);
+      Book thisBook = _db.Books
+        .Include(book => book.JoinEntities)
+          .ThenInclude(join => join.Genre)
+        .FirstOrDefault(book => book.BookId == id);
       return View(thisBook);
     }
 

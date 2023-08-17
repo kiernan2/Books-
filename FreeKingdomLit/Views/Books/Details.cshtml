@@ -1,10 +1,25 @@
 @using FreeKingdomLit.Models
 @model FreeKingdomLit.Models.Book
 
-<h1>Book Details Page</h1>
+<h1>Book Details</h1>
 
 <p>Title: @Model.Title</p>
 <p>Pages: @Model.Pages</p>
+
+@if(Model.JoinEntities.Any())
+{
+  <h2>Genres</h2>
+  <ul>
+    @foreach(BookGenre join in Model.JoinEntities)
+    {
+      <li>@join.Genre.Name</li>
+    }
+  </ul>
+}
+else
+{
+  <p>No Genres Assigned Here</p>
+}
 
 <p>@Html.ActionLink("Delete", "Delete", new {id = Model.BookId})</p>
 <p>@Html.ActionLink("Edit", "Edit", new {id = Model.BookId})</p>
