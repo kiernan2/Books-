@@ -13,6 +13,9 @@
   @Html.LabelFor(model => model.Pages)
   @Html.EditorFor(model => model.Pages)
 
+  @Html.Label("Change genre")
+  @Html.DropDownList("GenreId")
+
   <input type="submit" value="Save" />
 }
 

@@ -54,12 +54,18 @@ namespace FreeKingdomLit.Controllers
     public ActionResult Edit(int id)
     {
       Book thisBook = _db.Books.FirstOrDefault(book => book.BookId == id);
+      ViewBag.GenreId = new SelectList(_db.Genres, "GenreId", "Name");
       return View(thisBook);
     }
 
     [HttpPost]
-    public ActionResult Edit(Book book)
+    public ActionResult Edit(Book book, int genreId)
     {
+      bool duplicate = _db.BooksGenres.Any(join => join.GenreId == genreId && join.BookId == book.BookId);
+      if(!duplicate && genreId != 0)
+      {
+        _db.BooksGenres.Add(new BookGenre() {BookId = book.BookId, GenreId = genreId});
+      }
       _db.Entry(book).State = EntityState.Modified;
       _db.SaveChanges();
       return RedirectToAction("Details", new {id = book.BookId});
