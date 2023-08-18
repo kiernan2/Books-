@@ -12,6 +12,11 @@
     @foreach(BookGenre join in Model.JoinEntities)
     {
       <li>@join.Book.Title</li>
+      @using (Html.BeginForm("DeleteBook", "Genres"))
+      {
+        @Html.Hidden("joinId", @join.BookGenreId)
+        <input type="submit" value="Delete">
+      }
     }
   </ul>
 }
