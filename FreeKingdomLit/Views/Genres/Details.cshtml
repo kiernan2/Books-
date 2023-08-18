@@ -5,6 +5,21 @@
 
 <p>@Model.Name</p>
 
+@if(Model.JoinEntities.Any())
+{
+  <h2>Books</h2>
+  <ul>
+    @foreach(BookGenre join in Model.JoinEntities)
+    {
+      <li>@join.Book.Title</li>
+    }
+  </ul>
+}
+else
+{
+  <p>No Books Assigned Here</p>
+}
+
 <p>@Html.ActionLink("Delete", "Delete", new {id = Model.GenreId})</p>
 <p>@Html.ActionLink("Edit", "Edit", new {id = Model.GenreId})</p>
 <p>@Html.ActionLink("Back", "Index")</p>

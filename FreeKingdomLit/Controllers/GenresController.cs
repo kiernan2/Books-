@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using FreeKingdomLit.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering; 
 
 namespace FreeKingdomLit.Controllers
 {
@@ -37,8 +38,11 @@ namespace FreeKingdomLit.Controllers
 
     public ActionResult Details(int id)
     {
-      Genre genre = _db.Genres.FirstOrDefault(genre => genre.GenreId == id);
-      return View(genre);
+      Genre thisGenre = _db.Genres
+        .Include(genre => genre.JoinEntities)
+          .ThenInclude(join => join.Book)
+        .FirstOrDefault(genre => genre.GenreId == id);
+      return View(thisGenre);
     }
 
     public ActionResult Edit(int id)
