@@ -10,6 +10,9 @@
   @Html.LabelFor(model => model.Name)
   @Html.EditorFor(model => model.Name)
 
+  @Html.Label("Change Book")
+  @Html.DropDownList("BookId")
+
   <input type="submit" value="Save" />
 }
 
