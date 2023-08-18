@@ -36,7 +36,7 @@ namespace FreeKingdomLit.Controllers
       _db.SaveChanges();
       if (genreId != 0)
       {
-        _db.BooksGenres.Add(new BookGenre() { GenreId = genreId , BookId = book.BookId });
+        _db.BooksGenres.Add(new BookGenre() { GenreId = genreId, BookId = book.BookId });
         _db.SaveChanges();
       }
       return RedirectToAction("Index");

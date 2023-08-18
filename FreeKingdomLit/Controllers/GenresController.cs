@@ -25,14 +25,20 @@ namespace FreeKingdomLit.Controllers
 
     public ActionResult Create()
     {
+      ViewBag.BookId = new SelectList(_db.Books, "BookId", "Title");
       return View();
     }
 
     [HttpPost]
-    public ActionResult Create(Genre genre)
+    public ActionResult Create(Genre genre, int bookId)
     {
       _db.Genres.Add(genre);
       _db.SaveChanges();
+      if (bookId != 0)
+      {
+        _db.BooksGenres.Add(new BookGenre() { BookId = bookId, GenreId = genre.GenreId});
+        _db.SaveChanges();
+      }
       return RedirectToAction("Index");
     }
 
