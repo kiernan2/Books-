@@ -104,5 +104,14 @@ namespace FreeKingdomLit.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    [HttpPost]
+    public ActionResult DeleteGenre (int joinId)
+    {
+      BookGenre thisBookGenre = _db.BooksGenres.FirstOrDefault(join => join.BookGenreId == joinId);
+      _db.BooksGenres.Remove(thisBookGenre);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
