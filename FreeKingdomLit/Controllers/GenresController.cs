@@ -71,6 +71,25 @@ namespace FreeKingdomLit.Controllers
       return RedirectToAction("Details", new { id = genre.GenreId });
     }
 
+    public ActionResult AddBook(int id)
+    {
+      Genre thisGenre = _db.Genres.FirstOrDefault(genre => genre.GenreId == id);
+      ViewBag.BookId = new SelectList(_db.Books, "BookId", "Title");
+      return View(thisGenre);
+    }
+
+    [HttpPost]
+    public ActionResult AddBook(Genre genre, int bookId)
+    {
+      bool duplicate = _db.BooksGenres.Any(join => join.BookId == bookId && join.GenreId == genre.GenreId);
+      if (bookId != 0 && !duplicate)
+      {
+        _db.BooksGenres.Add(new BookGenre() { BookId = bookId, GenreId = genre.GenreId });
+      }
+      _db.SaveChanges();
+      return RedirectToAction("Details", new {id = genre.GenreId});
+    }
+
     public ActionResult Delete(int id)
     {
       Genre genre = _db.Genres.FirstOrDefault(genre => genre.GenreId == id);
