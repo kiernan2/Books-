@@ -1,0 +1,17 @@
+@model FreeKingdomLit.Models.Book
+
+<h2>Add a Genre</h2>
+
+<h4>Add a Genre to this Book: @Html.DisplayFor(model => model.Title)</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.BookId)
+
+  @Html.Label("Select Genre")
+  @Html.DropDownList("GenreId")
+
+  <input type="submit" value="Save" />
+}
+
+<p>@Html.ActionLink("Back", "Index")</p>
