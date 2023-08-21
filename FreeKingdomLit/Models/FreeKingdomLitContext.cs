@@ -1,8 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace FreeKingdomLit.Models
 {
-  public class FreeKingdomLitContext : DbContext
+  public class FreeKingdomLitContext : IdentityDbContext<ApplicationUser>
   {
     public DbSet<Book> Books { get; set; }
     public DbSet<Genre> Genres { get; set; }
