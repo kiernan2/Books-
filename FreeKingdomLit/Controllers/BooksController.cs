@@ -39,8 +39,12 @@ namespace FreeKingdomLit.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Book book, int genreId)
+    public async Task<ActionResult> Create(Book book, int genreId)
     {
+      string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+      book.User = currentUser;
+
       _db.Books.Add(book);
       _db.SaveChanges();
       if (genreId != 0)
