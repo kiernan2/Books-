@@ -1,25 +1,34 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using FreeKingdomLit.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FreeKingdomLit.Controllers
 {
+  [Authorize]
   public class BooksController : Controller
   {
 
     private readonly FreeKingdomLitContext _db;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public BooksController(FreeKingdomLitContext db)
+    public BooksController(FreeKingdomLitContext db, UserManager<ApplicationUser> userManager)
     {
+      _userManager = userManager;
       _db = db;
     }
 
-    public ActionResult Index()
+    public async Task<ActionResult> Index()
     {
-      List<Book> newList = _db.Books.ToList();
+      string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+      List<Book> newList = _db.Books.Where(entry => entry.User.Id == currentUser.Id).ToList();
       return View(newList);
     }
 
