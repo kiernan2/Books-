@@ -14,7 +14,6 @@ namespace FreeKingdomLit.Controllers
   [Authorize]
   public class BooksController : Controller
   {
-
     private readonly FreeKingdomLitContext _db;
     private readonly UserManager<ApplicationUser> _userManager;
 
