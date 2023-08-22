@@ -3,14 +3,16 @@ using System;
 using FreeKingdomLit.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FreeKingdomLit.Migrations
 {
     [DbContext(typeof(FreeKingdomLitContext))]
-    partial class FreeKingdomLitContextModelSnapshot : ModelSnapshot
+    [Migration("20230822211845_addGenreAuth")]
+    partial class addGenreAuth
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

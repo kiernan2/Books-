@@ -6,6 +6,7 @@ namespace FreeKingdomLit.Models
   {
     public int GenreId { get; set; }
     public string Name { get; set; }
+    public virtual ApplicationUser User{ get; set; }
     public virtual ICollection<BookGenre> JoinEntities { get; }
 
     public Genre()

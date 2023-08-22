@@ -1,26 +1,35 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using FreeKingdomLit.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering; 
 
 namespace FreeKingdomLit.Controllers
 {
+  [Authorize]
   public class GenresController : Controller
   {
 
+    private readonly UserManager<ApplicationUser> _userManager;
     private readonly FreeKingdomLitContext _db;
 
-    public GenresController(FreeKingdomLitContext db)
+    public GenresController(FreeKingdomLitContext db, UserManager<ApplicationUser> userManager)
     {
       _db = db;
+      _userManager = userManager;
     }
 
-    public ActionResult Index()
+    public async Task<ActionResult> Index()
     {
-      List<Genre> genres = _db.Genres.ToList();
-      return View(genres);
+      string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+      List<Genre> genresList = _db.Genres.Where(entry => entry.User.Id == currentUser.Id).ToList();
+      return View(genresList);
     }
 
     public ActionResult Create()
@@ -30,8 +39,12 @@ namespace FreeKingdomLit.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Genre genre, int bookId)
+    public async Task<ActionResult> Create(Genre genre, int bookId)
     {
+      string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+      genre.User = currentUser;
+
       _db.Genres.Add(genre);
       _db.SaveChanges();
       if (bookId != 0)
